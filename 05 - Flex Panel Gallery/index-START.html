@@ -55,6 +55,31 @@
         flex-direction: column;
       }
 
+      .panel > *:first-child {
+        border: solid 5px red;
+        transform: translateY(-300%);
+      }
+
+      .panel.open > *:first-child {
+        border: solid 5px green;
+        transform: translateY(0);
+      }
+
+      .panel > *:last-child {
+        border: solid 5px red;
+        transform: translateY(300%);
+      }
+
+      .panel.open > *:last-child {
+        border: solid 5px green;
+        transform: translateY(0);
+      }
+
+      .panel.peak {
+        flex: 3;
+        font-size: 40px;
+      }
+
       .panel1 {
         background-image: url(https://picsum.photos/id/13/1500);
       }
@@ -88,10 +113,6 @@
       .panel p:nth-child(2) {
         font-size: 4em;
       }
-
-      .panel.open {
-        font-size: 40px;
-      }
     </style>
 
     <div class="panels">
@@ -122,6 +143,26 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      const panels = document.querySelectorAll(".panel");
+
+      function handlePeak() {
+        this.classList.toggle("peak");
+        console.log(this);
+        // console.log(panel);
+        // panels.
+      }
+
+      function handleOpen(e) {
+        if (e.propertyName.includes("flex")) {
+          this.classList.toggle("open");
+        }
+      }
+
+      panels.forEach((panel) => panel.addEventListener("click", handlePeak));
+      panels.forEach((panel) =>
+        panel.addEventListener("transitionend", handleOpen)
+      );
+    </script>
   </body>
 </html>
